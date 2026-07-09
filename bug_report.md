@@ -29,7 +29,6 @@ Every fix is minimal, preserves the API contract exactly (paths, status codes, e
 | 20 | `app/routers/bookings.py` | 12 | `fix/bug-20-create-report-cache` | dc190b0 | PASS |
 | 21 | `app/routers/auth.py` | 15 | `fix/bug-21-register-race` | f261fd8 | PASS |
 
-Merge state at compilation: #1–#20 and #17b merged into `origin/main` (`1a4461a`); #21 pushed, awaiting merge.
 
 ---
 
@@ -471,4 +470,3 @@ Note: guards BOTH inserts. Org-name race → rollback, adopt the now-existing or
 
 ---
 
-*End of consolidated fix-note compilation. All 22 fix sites (#1–#21 + #17b) covered.*
