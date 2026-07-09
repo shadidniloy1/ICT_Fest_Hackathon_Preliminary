@@ -4,3 +4,11 @@ __pycache__/
 .venv/
 venv/
 .pytest_cache/
+
+# Defensive: never push planning/reference artifacts (they normally live
+# outside this repo root, this is a belt-and-suspenders guard).
+/plan/
+Bugs.md
+*_Planning.md
+.kiro/
+.agents/
