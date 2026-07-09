@@ -29,7 +29,9 @@ def notify_created(booking) -> None:
 
 
 def notify_cancelled(booking) -> None:
-    with _audit_lock:
-        _write_audit("cancelled", booking)
-        with _email_lock:
-            _send_email("cancelled", booking)
+    # Acquire _email_lock before _audit_lock to match notify_created's order
+    # and avoid an AB-BA deadlock under concurrent create/cancel (Rule 16).
+    with _email_lock:
+        with _audit_lock:
+            _write_audit("cancelled", booking)
+        _send_email("cancelled", booking)
