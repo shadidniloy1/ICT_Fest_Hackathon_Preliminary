@@ -23,6 +23,10 @@ from .models import User
 # longer be used.
 _revoked_tokens: set[str] = set()
 
+# Refresh-token jtis that have already been used (rotated) so they cannot be
+# replayed. Refresh tokens are single-use (Rule 8).
+_used_refresh_jtis: set[str] = set()
+
 _PBKDF2_ROUNDS = 100_000
 
 
@@ -84,6 +88,14 @@ def decode_token(token: str) -> dict:
 
 def revoke_access_token(payload: dict) -> None:
     _revoked_tokens.add(payload["jti"])
+
+
+def revoke_refresh_token(payload: dict) -> None:
+    _used_refresh_jtis.add(payload["jti"])
+
+
+def is_refresh_token_used(payload: dict) -> bool:
+    return payload.get("jti") in _used_refresh_jtis
 
 
 def get_token_payload(request: Request) -> dict:
