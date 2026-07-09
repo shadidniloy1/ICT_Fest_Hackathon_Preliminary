@@ -29,7 +29,10 @@ def record_cancel(room_id: int, price_cents: int) -> None:
         current = _stats.get(room_id, {"count": 0, "revenue": 0})
         count, revenue = current["count"], current["revenue"]
         _aggregate_pause()
-        _stats[room_id] = {"count": max(0, count - 1), "revenue": revenue - price_cents}
+        # Floor revenue at 0 to match the count floor above: if cancels ever
+        # outrun tracked creates for a room, neither aggregate should go
+        # negative (Rule 14).
+        _stats[room_id] = {"count": max(0, count - 1), "revenue": max(0, revenue - price_cents)}
 
 
 def get(room_id: int) -> dict:
