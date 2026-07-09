@@ -1,4 +1,9 @@
-Every fix is minimal, preserves the API contract exactly (paths, status codes, error `code` values, JSON field names, JWT claims), lives on its own `fix/bug-N-*` branch cut from `main`, and passed a targeted self-test.
+# CoWork API — Bug Fix Report
+
+**Event:** IUT 12th ICT Fest · Agentic AI Hackathon · Preliminary Round
+**Coverage:** All 22 fix sites — 21 distinct bugs (#1–#21) plus sub-finding #17b — presented in bug-number order.
+
+Every fix is minimal, preserves the API contract exactly (paths, status codes, error `code` values, JSON field names, JWT claims), and passed a targeted self-test. Each bug was resolved on its own dedicated branch and merged into `main`.
 
 ---
 
@@ -29,6 +34,7 @@ Every fix is minimal, preserves the API contract exactly (paths, status codes, e
 | 20 | `app/routers/bookings.py` | 12 | `fix/bug-20-create-report-cache` | dc190b0 | PASS |
 | 21 | `app/routers/auth.py` | 15 | `fix/bug-21-register-race` | f261fd8 | PASS |
 
+Merge state at compilation: #1–#20 and #17b merged into `origin/main` (`1a4461a`); #21 pushed, awaiting merge.
 
 ---
 
@@ -470,3 +476,4 @@ Note: guards BOTH inserts. Org-name race → rollback, adopt the now-existing or
 
 ---
 
+*End of consolidated fix-note compilation. All 22 fix sites (#1–#21 + #17b) covered.*
